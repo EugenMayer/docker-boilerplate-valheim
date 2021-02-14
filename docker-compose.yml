@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  vallheim:
+    container_name: vallheim
+    image: lloesche/valheim-server
+    ports:
+      - '2456-2458:2456-2458/udp'
+    volumes:
+      - vallheim-config:/config
+    environment:
+      SERVER_NAME: 'hotpot'
+      SERVER_PASS: 'freiburghotpot'
+      WOLRD_NAME: 'Vallheim'
+
+volumes:
+  vallheim-config:
