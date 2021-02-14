@@ -39,7 +39,9 @@ update() {
         fi
     else
         echo "Skipping automatic updates and starting server now"
-        supervisorctl start valheim-server
+        if [ $just_started = true ]; then
+            supervisorctl start valheim-server
+        fi
     fi
    
     just_started=false
