@@ -9,9 +9,9 @@ services:
     volumes:
       - vallheim-config:/config
     environment:
-      SERVER_NAME: 'hotpot'
-      SERVER_PASS: 'freiburghotpot'
-      WOLRD_NAME: 'Vallheim'
+      SERVER_NAME: $SERVER_NAME
+      SERVER_PASS: $PASSWORD
+      WOLRD_NAME: $WORLD
 
 volumes:
   vallheim-config:
