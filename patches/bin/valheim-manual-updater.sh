@@ -15,6 +15,8 @@ fi
 cd /opt/steamcmd
 ./steamcmd.sh +login anonymous +force_install_dir /opt/valheim_dl +app_update 896660 validate +quit
 rsync -a --itemize-changes --delete --exclude server_exit.drp --exclude steamapps /opt/valheim_dl/ /opt/valheim
+# TODO: there are always changes, even if nothing has been pulled. Try to have a better "changed" detection then
+# rsync hash over all files
 if [ $? -eq 0 ]; then
     echo "Valheim Server was updated - restarting"
     supervisorctl restart valheim-server
