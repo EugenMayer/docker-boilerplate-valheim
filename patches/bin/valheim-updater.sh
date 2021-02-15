@@ -6,7 +6,7 @@ WORLDS_DIRECTORY_PERMISSIONS=${WORLDS_DIRECTORY_PERMISSIONS:-755}
 WORLDS_FILE_PERMISSIONS=${WORLDS_FILE_PERMISSIONS:-644}
 UPDATE_INTERVAL=${UPDATE_INTERVAL:-900}
 SKIP_AUTOUPDATES=${SKIP_AUTOUPDATES:-0}
-just_started=true
+just_started=${START_IF_NO_UPDATE:-true}
 next_update=$(date +%s)
 
 cd /opt/steamcmd
@@ -28,6 +28,8 @@ update() {
         echo "Skipping automatic updates and starting server now"
         if [ $just_started = true ]; then
             supervisorctl start valheim-server
+        else
+            supervisorctl restart valheim-server
         fi
     else
         ./steamcmd.sh +login anonymous +force_install_dir /opt/valheim_dl +app_update 896660 validate +quit
