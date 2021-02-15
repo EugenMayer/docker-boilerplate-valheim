@@ -28,8 +28,6 @@ update() {
         echo "Skipping automatic updates and starting server now"
         if [ $just_started = true ]; then
             supervisorctl start valheim-server
-        else
-            supervisorctl restart valheim-server
         fi
     else
         ./steamcmd.sh +login anonymous +force_install_dir /opt/valheim_dl +app_update 896660 validate +quit
