@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 # Fix permissions in case they were altered externaly
 echo "Running Valheim Server updater as user $USER uid $UID"
 CONFIG_DIRECTORY_PERMISSIONS=${CONFIG_DIRECTORY_PERMISSIONS:-755}
@@ -24,8 +24,13 @@ main() {
 update() {
     local logfile="$(mktemp)"
     echo "Updating/Validating Valheim Server"
-    if [ "$SKIP_AUTOUPDATES" -eq "0" ]; then
-         ./steamcmd.sh +login anonymous +force_install_dir /opt/valheim_dl +app_update 896660 validate +quit
+    if [ "$SKIP_AUTOUPDATES" -eq "1" ]; then
+        echo "Skipping automatic updates and starting server now"
+        if [ $just_started = true ]; then
+            supervisorctl start valheim-server
+        fi
+    else
+        ./steamcmd.sh +login anonymous +force_install_dir /opt/valheim_dl +app_update 896660 validate +quit
         rsync -a --itemize-changes --delete --exclude server_exit.drp --exclude steamapps /opt/valheim_dl/ /opt/valheim | tee "$logfile"
         grep '^[*>]' "$logfile" > /dev/null 2>&1
         if [ $? -eq 0 ]; then
@@ -36,11 +41,6 @@ update() {
             if [ $just_started = true ]; then
                 supervisorctl start valheim-server
             fi
-        fi
-    else
-        echo "Skipping automatic updates and starting server now"
-        if [ $just_started = true ]; then
-            supervisorctl start valheim-server
         fi
     fi
    

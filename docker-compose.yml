@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  vallheim:
-    container_name: vallheim
+  valheim:
+    container_name: valheim
     image: lloesche/valheim-server
     ports:
       - '2456-2458:2456-2458/udp'
