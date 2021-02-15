@@ -8,7 +8,7 @@ services:
       - '2456-2458:2456-2458/udp'
     volumes:
       - vallheim-config:/config
-      - valheim-dl:/opt/valheim
+      - valheim-dl:/opt/valheim_dl
       - valheim-runtime:/opt/valheim
       - ./patches/bin/valheim-updater.sh:/usr/local/bin/valheim-updater
       - ./patches/supervisor_updater.conf:/etc/supervisor/conf.d/supervisor_updater.conf
