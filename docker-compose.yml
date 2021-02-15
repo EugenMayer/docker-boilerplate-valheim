@@ -11,7 +11,8 @@ services:
       - valheim-dl:/opt/valheim_dl
       - valheim-runtime:/opt/valheim
       - ./patches/bin/valheim-updater.sh:/usr/local/bin/valheim-updater
-      - ./patches/supervisor_updater.conf:/etc/supervisor/conf.d/supervisor_updater.conf
+      - ./patches/bin/valheim-manual-updater.sh:/usr/local/bin/valheim-manual-updater
+      #- ./patches/supervisor_updater.conf:/etc/supervisor/conf.d/supervisor_updater.conf
     environment:
       SERVER_NAME: $SERVER_NAME
       SERVER_PASS: $PASSWORD
