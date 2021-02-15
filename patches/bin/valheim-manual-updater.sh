@@ -12,6 +12,7 @@ if [ -d /config/worlds ]; then
     chmod $WORLDS_FILE_PERMISSIONS /config/worlds/*
 fi
 
+cd /opt/steamcmd
 ./steamcmd.sh +login anonymous +force_install_dir /opt/valheim_dl +app_update 896660 validate +quit
 rsync -a --itemize-changes --delete --exclude server_exit.drp --exclude steamapps /opt/valheim_dl/ /opt/valheim | tee "$logfile"
 grep '^[*>]' "$logfile" > /dev/null 2>&1
