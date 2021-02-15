@@ -15,6 +15,8 @@ PASSWORD=secretpassword
 Then start with
 
 ```
+./start.sh
+# or
 docker-compose up -d
 ```
 
