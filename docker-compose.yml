@@ -1,25 +1,20 @@
-version: '3'
-
-services:
-  valheim:
-    container_name: valheim
+version: "3.9"
+services: 
+  valheim: 
     image: lloesche/valheim-server
-    ports:
-      - '2456-2458:2456-2458/udp'
-    volumes:
+    volumes: 
       - vallheim-config:/config
-      - valheim-dl:/opt/valheim_dl
-      - valheim-runtime:/opt/valheim
-      - ./patches/bin/valheim-updater.sh:/usr/local/bin/valheim-updater
-      - ./patches/bin/valheim-manual-updater.sh:/usr/local/bin/valheim-manual-updater
-      #- ./patches/supervisor_updater.conf:/etc/supervisor/conf.d/supervisor_updater.conf
-    environment:
-      SERVER_NAME: $SERVER_NAME
-      SERVER_PASS: $PASSWORD
-      WORLD_NAME: $WORLD
-      SKIP_AUTOUPDATES: $SKIP_AUTOUPDATES
+      - valheim-gamedata:/opt/valheim
+    ports: 
+      - "2456-2458:2456-2458/udp" 
+    environment: 
+      - SERVER_NAME=$SERVER_NAME
+      - SERVER_PASS=$PASSWORD
+      - WORLD_NAME=$WORLD
+      - SERVER_PUBLIC=1
 
 volumes:
   vallheim-config:
-  valheim-runtime:
-  valheim-dl:
+    driver: local
+  valheim-gamedata:
+    driver: local
